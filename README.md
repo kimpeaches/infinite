@@ -2,10 +2,8 @@
 
 Team:
 
-
-* Peter Sayaseng - Service Microservice
 * Kim - Sales
-
+* Peter Sayaseng - Service Microservice
 
 ## Design
 
