@@ -2,13 +2,8 @@
 
 Team:
 
-<<<<<<< HEAD
-* Person 1 - Which microservice?
-* Peter Sayaseng - Service Microservice
-=======
 * Kim - Sales
-* Person 2 - Which microservice?
->>>>>>> main
+* Peter Sayaseng - Service Microservice
 
 ## Design
 
