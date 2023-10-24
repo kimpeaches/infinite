@@ -11,7 +11,19 @@ django.setup()
 
 # Import models from sales_rest, here.
 # from sales_rest.models import Something
+from sales_rest.models import AutomobileVO
 
+def get_automobile():
+    url = "http://project-beta-inventory-api-1:8000/api/automobiles/"
+    response = requests.get(url)
+    data = json.loads(response.content)
+    for automobile in data["automobiles"]:
+        AutomobileVO.objects.update_or_create(
+            import_href=automobile["href"],
+            defaults = {
+                "vin": automobile["vin"]
+            }
+        )
 
 def poll(repeat=True):
     while True:
@@ -20,10 +32,10 @@ def poll(repeat=True):
             # Write your polling logic, here
             # Do not copy entire file
 
-            pass
+            get_automobile()
         except Exception as e:
             print(e, file=sys.stderr)
-        
+
         if (not repeat):
             break
 
