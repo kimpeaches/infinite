@@ -1,0 +1,80 @@
+import React, { useEffect, useState } from "react";
+
+function ModelForm(props) {
+
+    const [manufacturers, setManufacturers] = useState([])
+    const fetchData = async () => {
+        const response = await fetch("http://localhost:8100/api/manufacturers/");
+        if (response.ok) {
+            const data = await response.json();
+            setManufacturers(data.manufacturers)
+        }
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = {};
+        new FormData(e.target).forEach((value, key) => (data[key] = value));
+
+        const modelUrl = 'http://localhost:8100/api/models/';
+        const fetchConfig = {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+
+        const response = await fetch(modelUrl, fetchConfig);
+        if (response.ok) {
+            const newModel = await response.json();
+            console.log(newModel);
+            e.target.reset();
+        }
+}
+
+    return (
+<div className="container">
+      <div className="row">
+        <div className="col-md-6 offset-md-3">
+          <div className="card mt-4">
+            <div className="card-body">
+              <h3 className="card-title">Create a vehicle model</h3>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <input type="text" className="form-control" name="model_name" placeholder="Model name" />
+                </div>
+                <div className="mb-3">
+                  <input type="url" className="form-control" name="picture_url" placeholder="Picture URL" />
+                </div>
+                <div className="mb-3">
+                  <input type="text" className="form-control" name="address" placeholder="Address" />
+                </div>
+                <div>
+                    <select name="manufacturers">
+                        <option value="">Choose a manufacturer</option>
+                        {manufacturers.map(manufacturer => {
+                                            return (
+                                                <option key={manufacturer.href} value={manufacturer.id}>{manufacturer.name}</option>
+                                            )
+                                        })}
+                    </select>
+                </div>
+
+                <button type="submit" className="btn btn-primary">
+                  Create
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      );
+    }
+
+export default ModelForm

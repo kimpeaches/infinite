@@ -17,10 +17,10 @@ function Nav() {
               <NavLink className="nav-link" to="/">Create a Manufacturer</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Models</NavLink>
+              <NavLink className="nav-link" to="models/">Models</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Create a model</NavLink>
+              <NavLink className="nav-link" to="models/create/">Create a model</NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/">Automobiles</NavLink>
@@ -32,19 +32,22 @@ function Nav() {
               <NavLink className="nav-link" to="salespeople/">Salespeople</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Add a Salesperson</NavLink>
+              <NavLink className="nav-link" to="salespeople/create/">Add a Salesperson</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Customers</NavLink>
+              <NavLink className="nav-link" to="customers/">Customers</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Add a customer</NavLink>
+              <NavLink className="nav-link" to="customers/create/">Add a customer</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Sales</NavLink>
+              <NavLink className="nav-link" to="sales/">Sales</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/">Add a Sale</NavLink>
+              <NavLink className="nav-link" to="sales/create/">Add a Sale</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="sales/history/">Salesperson History</NavLink>
             </li>
           </ul>
         </div>

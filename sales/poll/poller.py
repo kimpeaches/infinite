@@ -17,7 +17,7 @@ def get_automobile():
     url = "http://project-beta-inventory-api-1:8000/api/automobiles/"
     response = requests.get(url)
     data = json.loads(response.content)
-    for automobile in data["automobiles"]:
+    for automobile in data["autos"]:
         AutomobileVO.objects.update_or_create(
             import_href=automobile["href"],
             defaults = {
