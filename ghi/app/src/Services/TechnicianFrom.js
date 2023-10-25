@@ -1,10 +1,10 @@
-function ManufacturerForm(props){
+function TechnicianForm(props){
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {}
         new FormData(e.target).forEach((value,key) => (data[key]= value))
 
-        const manuUrl = "http://localhost:8100/api/manufacturers/"
+        const techUrl = "http://localhost:8080/api/technicians/"
         const fetchConfig = {
             method: "POST",
             body: JSON.stringify(data),
@@ -13,7 +13,7 @@ function ManufacturerForm(props){
             },
         }
 
-        const response = await fetch(manuUrl, fetchConfig)
+        const response = await fetch(techUrl, fetchConfig)
         if (response.ok){
             e.target.reset()
     }
@@ -27,10 +27,16 @@ function ManufacturerForm(props){
         <div className="col-md-6 offset-md-3">
             <div className="card mt-4">
                 <div className='card-body'>
-          <h1 className='card-title'>Create a new Manufacturer</h1>
+          <h1 className='card-title'>Create a new Technician</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <input type="text" className="form-control" name="name" placeholder="Name" />
+              <input type="text" className="form-control" name="first_name" placeholder="First name" />
+              </div>
+            <div className="mb-3">
+              <input type="text" className="form-control" name="last_name" placeholder="Last name" />
+              </div>
+            <div className="mb-3">
+              <input type="text" className="form-control" name="employee_id" placeholder="Employee ID" />
               </div>
             <button type="submit" className="btn btn-primary">Create</button>
           </form>
@@ -41,4 +47,4 @@ function ManufacturerForm(props){
     </div>
   );
 }
-export default ManufacturerForm
+export default TechnicianForm
