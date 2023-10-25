@@ -1,21 +1,4 @@
-import React, { useEffect, useState } from 'react';
-
-function ModelList() {
-
-    const [models, setModels] = useState([])
-
-    const getData = async () => {
-        const response = await fetch("http://localhost:8100/api/models/");
-        if (response.ok) {
-            const data = await response.json();
-            setModels(data.models)
-        }
-    }
-
-    useEffect(() => {
-        getData()
-    }, [])
-
+function ModelList({models}) {
     return (
         <div className="container">
           <h2 className="text-center">Models</h2>

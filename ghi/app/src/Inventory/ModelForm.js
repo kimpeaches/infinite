@@ -1,24 +1,9 @@
-import React, { useEffect, useState } from "react";
-
-function ModelForm(props) {
-
-    const [manufacturers, setManufacturers] = useState([])
-    const fetchData = async () => {
-        const response = await fetch("http://localhost:8100/api/manufacturers/");
-        if (response.ok) {
-            const data = await response.json();
-            setManufacturers(data.manufacturers)
-        }
-    }
-
-    useEffect(() => {
-        fetchData()
-    }, [])
-
+function ModelForm({manufacturer, updateModel}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const data = {};
         new FormData(e.target).forEach((value, key) => (data[key] = value));
+        console.log(data)
 
         const modelUrl = 'http://localhost:8100/api/models/';
         const fetchConfig = {
@@ -31,9 +16,8 @@ function ModelForm(props) {
 
         const response = await fetch(modelUrl, fetchConfig);
         if (response.ok) {
-            const newModel = await response.json();
-            console.log(newModel);
             e.target.reset();
+            updateModel()
         }
 }
 
@@ -46,20 +30,17 @@ function ModelForm(props) {
               <h3 className="card-title">Create a vehicle model</h3>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <input type="text" className="form-control" name="model_name" placeholder="Model name" />
+                  <input type="text" className="form-control" name="name" placeholder="Model name" />
                 </div>
                 <div className="mb-3">
                   <input type="url" className="form-control" name="picture_url" placeholder="Picture URL" />
                 </div>
-                <div className="mb-3">
-                  <input type="text" className="form-control" name="address" placeholder="Address" />
-                </div>
                 <div>
-                    <select name="manufacturers">
+                    <select name="manufacturer">
                         <option value="">Choose a manufacturer</option>
-                        {manufacturers.map(manufacturer => {
+                        {manufacturer.map(manufacturer => {
                                             return (
-                                                <option key={manufacturer.href} value={manufacturer.id}>{manufacturer.name}</option>
+                                                <option key={manufacturer.id} value={manufacturer.name}>{manufacturer.name}</option>
                                             )
                                         })}
                     </select>
