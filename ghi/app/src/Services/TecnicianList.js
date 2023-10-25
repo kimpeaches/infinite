@@ -1,5 +1,4 @@
-
-function TechnicianList(props) {
+function TechnicianList({technician}) {
     return (
         <>
             <h2 className="text-center">Technicians</h2>
@@ -12,7 +11,7 @@ function TechnicianList(props) {
         </tr>
         </thead>
         <tbody className="table-hover">
-            {props.technician.map(tech => {
+            {technician.map(tech => {
                 return (
                 <tr key={ tech.employee_id }>
                     <td className="text-left">{ tech.employee_id }</td>
@@ -25,8 +24,6 @@ function TechnicianList(props) {
     </table>
     </>
     );
-
-
 }
 
 export default TechnicianList;
