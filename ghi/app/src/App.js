@@ -3,8 +3,6 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import AgentList from './Sales/AgentList';
 import AgentForm from './Sales/AgentForm';
-import CustomersList from './Sales/CustomersList';
-import CustomersForm from './Sales/CustomersForm';
 import SalesList from './Sales/SalesList';
 import SalesForm from './Sales/SalesForm';
 import SalesHistory from './Sales/SalesHistory';
@@ -20,6 +18,8 @@ import ManufacturerForm from './Inventory/ManufacturerForm';
 import AutomobileList from './Inventory/AutomobileList';
 import AutomobileForm from './Inventory/AutomobileForm';
 import ServiceHistory from './Services/ServiceHistory';
+import CustomersList from './Sales/CustomersList';
+import CustomersForm from './Sales/CustomersForm';
 
 
 function App() {
@@ -113,7 +113,7 @@ function App() {
             </Route>
           <Route path="manufacturers">
             <Route path="list" element={<ManufacturerList manufacturer={manufacturer} />}/>
-            <Route path="create" element={<ManufacturerForm />}/>
+            <Route path="create" element={<ManufacturerForm updateManufacturer={getManufacturer}/>}/>
             </Route>
           <Route path="technicians">
             <Route path="list" element={<TechnicianList technician={technician} />}/>
