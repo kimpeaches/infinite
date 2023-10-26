@@ -69,7 +69,7 @@ function AppointmentList({appointment, updateAppointment}) {
                                 <button onClick={()=> cancelAppointment(appointment.id)}>Cancel</button>
                             </td>
                             <td>
-                                <button onClick={()=> completeAppointment(appointment.id)}>Comeplete</button>
+                                <button onClick={()=> completeAppointment(appointment.id)}>Complete</button>
                             </td>
                         </tr>
                     );

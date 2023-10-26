@@ -1,4 +1,4 @@
-function TechnicianForm(props){
+function TechnicianForm({updateTechnician}){
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {}
@@ -16,6 +16,7 @@ function TechnicianForm(props){
         const response = await fetch(techUrl, fetchConfig)
         if (response.ok){
             e.target.reset()
+            updateTechnician()
     }
 }
 
