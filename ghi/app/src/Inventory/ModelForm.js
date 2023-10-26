@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function ModelForm() {
+function ModelForm({getModels}) {
 
   const [manufacturers, setManufacturers] = useState([])
   const fetchData = async () => {
@@ -31,6 +31,7 @@ function ModelForm() {
     const response = await fetch(modelUrl, fetchConfig);
     if (response.ok) {
       e.target.reset();
+      getModels()
     }
 }
 

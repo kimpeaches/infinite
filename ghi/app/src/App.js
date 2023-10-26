@@ -10,15 +10,13 @@ import SalesForm from './Sales/SalesForm';
 import SalesHistory from './Sales/SalesHistory';
 import ModelList from './Inventory/ModelList';
 import ModelForm from './Inventory/ModelForm';
-// import TechnicianList from './Services/TechnicianList';
+import TechnicianList from './Services/TecnicianList';
 import React, { useEffect, useState } from 'react';
-// import TechnicianForm from './Services/TechnicianFrom';
+import TechnicianForm from './Services/TechnicianFrom';
 import AppointmentList from './Services/Appointment';
 import AppointmentForm from './Services/AppointmentForm';
 import ManufacturerList from './Inventory/Manufacturer';
 import ManufacturerForm from './Inventory/ManufacturerForm';
-import CustomersList from './Sales/CustomersList';
-import CustomersForm from './Sales/CustomersForm';
 import AutomobileList from './Inventory/AutomobileList';
 import AutomobileForm from './Inventory/AutomobileForm';
 import ServiceHistory from './Services/ServiceHistory';
@@ -107,19 +105,19 @@ function App() {
           <Route path="sales/" element={<SalesList />} />
           <Route path="sales/create" element={<SalesForm />} />
           <Route path="sales/history" element={<SalesHistory />} />
-          <Route path="models/" element={<ModelList />} />
-          <Route path="models/create" element={<ModelForm />} />
+          <Route path="models/" element={<ModelList models={models} />} />
+          <Route path="models/create" element={<ModelForm updateModels={getModels} />} />
           <Route path="automobiles">
             <Route path="list" element={<AutomobileList automobiles={automobiles} />}/>
             <Route path="create" element={<AutomobileForm models={models} updateAuto={getAutomobiles} />}/>
             </Route>
-          <Route path="manufacturer">
+          <Route path="manufacturers">
             <Route path="list" element={<ManufacturerList manufacturer={manufacturer} />}/>
-            <Route path="new" element={<ManufacturerForm />}/>
+            <Route path="create" element={<ManufacturerForm />}/>
             </Route>
           <Route path="technicians">
             <Route path="list" element={<TechnicianList technician={technician} />}/>
-            <Route path="new" element={<TechnicianForm />}/>
+            <Route path="create" element={<TechnicianForm updateTechnician={getTechnicians} />}/>
             </Route>
           <Route path="appointments">
             <Route path="list" element={<AppointmentList appointment={appointment} updateAppointment={getAppointments} />}/>
