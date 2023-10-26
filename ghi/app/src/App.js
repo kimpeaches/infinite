@@ -10,7 +10,6 @@ import SalesHistory from './Sales/SalesHistory';
 import ModelList from './Inventory/ModelList';
 import ModelForm from './Inventory/ModelForm';
 import TechnicianList from './Services/TecnicianList';
-import React, { useEffect, useState } from 'react';
 import TechnicianForm from './Services/TechnicianFrom';
 import AppointmentList from './Services/Appointment';
 import AppointmentForm from './Services/AppointmentForm';
@@ -19,6 +18,8 @@ import ManufacturerForm from './Inventory/ManufacturerForm';
 import AutomobileList from './Inventory/AutomobileList';
 import AutomobileForm from './Inventory/AutomobileForm';
 import ServiceHistory from './Services/ServiceHistory';
+import CustomersList from './Sales/CustomersList';
+import CustomersForm from './Sales/CustomersForm';
 
 
 function App() {
