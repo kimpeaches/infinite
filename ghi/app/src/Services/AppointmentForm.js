@@ -1,11 +1,11 @@
-function AutomobileForm({models , updateAuto}){
+function AppointmentForm({technician,updateAppointment}){
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {}
         new FormData(e.target).forEach((value,key) => (data[key]= value))
         console.log(data)
 
-        const manuUrl = "http://localhost:8100/api/automobiles/"
+        const appUrl = "http://localhost:8080/api/appointments/"
         const fetchConfig = {
             method: "POST",
             body: JSON.stringify(data),
@@ -14,10 +14,10 @@ function AutomobileForm({models , updateAuto}){
             },
         }
 
-        const response = await fetch(manuUrl, fetchConfig)
+        const response = await fetch(appUrl, fetchConfig)
         if (response.ok){
             e.target.reset()
-            updateAuto()
+            updateAppointment()
     }
 }
 
@@ -29,28 +29,30 @@ function AutomobileForm({models , updateAuto}){
         <div className="col-md-6 offset-md-3">
             <div className="card mt-4">
                 <div className='card-body'>
-          <h1 className='card-title'>Create a new Automobile</h1>
+          <h1 className='card-title'>Create a new Appointment</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <input type="text" className="form-control" name="color" placeholder="Color" />
+              <input type="text" className="form-control" name="vin" placeholder="Automobile VIN" />
               </div>
             <div className="mb-3">
-              <input type="text" className="form-control" name="year" placeholder="Year" />
+              <input type="text" className="form-control" name="customer" placeholder="Customer" />
               </div>
             <div className="mb-3">
-              <input type="text" className="form-control" name="vin" placeholder="VIN" />
+              <input type="datetime-local" className="form-control" name="date_time" placeholder="mm/dd/yyyy" />
               </div>
               <div>
-                    <select name="model_id">
-                        <option value="model_id">Choose a model...</option>
-                        {models.map(models => {
+                    <select name="technician">
+                        <option value="">Choose a technician...</option>
+                        {technician.map(technician => {
                                             return (
-                                                <option key={models.id} value={models.id}>{models.manufacturer.name} {models.name}</option>
+                                                <option key={technician.employee_id} value={technician.employee_id}>{technician.first_name} {technician.last_name}</option>
                                             )
                                         })}
                     </select>
                 </div>
-
+                <div className="mb-3">
+              <input type="text" className="form-control" name="reason" placeholder="Reason" />
+              </div>
             <button type="submit" className="btn btn-primary">Create</button>
           </form>
           </div>
@@ -60,4 +62,4 @@ function AutomobileForm({models , updateAuto}){
     </div>
   );
 }
-export default AutomobileForm
+export default AppointmentForm

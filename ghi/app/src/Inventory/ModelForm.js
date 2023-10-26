@@ -16,8 +16,9 @@ function ModelForm({manufacturer, updateModel}) {
 
         const response = await fetch(modelUrl, fetchConfig);
         if (response.ok) {
-            e.target.reset();
-            updateModel()
+          e.target.reset();
+          updateModel()
+
         }
 }
 
@@ -36,11 +37,11 @@ function ModelForm({manufacturer, updateModel}) {
                   <input type="url" className="form-control" name="picture_url" placeholder="Picture URL" />
                 </div>
                 <div>
-                    <select name="manufacturer">
+                    <select name="manufacturer_id">
                         <option value="">Choose a manufacturer</option>
                         {manufacturer.map(manufacturer => {
                                             return (
-                                                <option key={manufacturer.id} value={manufacturer.name}>{manufacturer.name}</option>
+                                                <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
                                             )
                                         })}
                     </select>
