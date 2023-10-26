@@ -41,6 +41,7 @@ function AppointmentList({appointment, updateAppointment}) {
         <thead>
         <tr>
             <th className="text-left">Vin</th>
+            <th className="text-left">VIP</th>
             <th className="text-left">Customer</th>
             <th className="text-left">Date</th>
             <th className="text-left">Time</th>
@@ -56,9 +57,11 @@ function AppointmentList({appointment, updateAppointment}) {
                     let newtime = new Date(appointment.date_time)
                     let date = newtime.toLocaleDateString("en-US")
                     let time = newtime.toLocaleTimeString("en-US")
+                    const vip = appointment.vip ? "Yes" : "No";
                     return (
                         <tr key={appointment.id}>
                             <td>{appointment.vin}</td>
+                            <td>{vip}</td>
                             <td>{appointment.customer}</td>
                             <td>{date}</td>
                             <td>{time}</td>
