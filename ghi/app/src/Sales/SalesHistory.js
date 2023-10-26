@@ -1,74 +1,75 @@
 import React, { useEffect, useState } from 'react';
 
 function SalesHistory() {
-
     const [sale, setSale] = useState([])
+    const [salesDisplay, setSalesDisplay] = useState([])
+    const [salespeople, setSalesperson] = useState([])
+    const [selectedPerson, setSelectedPerson] = useState(undefined)
 
-    const getData = async () => {
-        const response = await fetch("http://localhost:8090/api/sales/");
+    const fetchData = async () => {
+
+        const url = 'http://localhost:8090/api/sales/';
+        const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
             setSale(data.sale)
+            setSalesDisplay(sale)
         }
-    }
-    useEffect(() => {
-        getData()
-    }, [])
-
-    const [salesperson, setSalesperson] = useState([])
-
-    const fetchData = async () => {
-        const response = await fetch("http://localhost:8090/api/salespeople/");
-        if (response.ok) {
-            const data = await response.json();
+        const salespersonUrl = 'http://localhost:8090/api/salespeople/';
+        const salespersonResponse = await fetch(salespersonUrl);
+        if (salespersonResponse.ok) {
+            const data = await salespersonResponse.json();
             setSalesperson(data.salesperson)
         }
+
     }
 
     useEffect(() => {
         fetchData()
-    }, [])
-
+    }, []);
+    const handleChange = (e) => {
+        const employee_id = e.target.value
+        setSelectedPerson(employee_id)
+    }
+    const sales = selectedPerson ? salesDisplay.filter(sale => sale.salesperson.employee_id === selectedPerson) : salesDisplay
     return (
         <>
-            <h2 className="text-center">Saleperson History</h2>
-            <div className="mb-3">
-                <div>
-                    <select name="salesperson">
-                        <option value="">Choose a salesperson</option>
-                        {salesperson.map(salesperson => {
-                                            return (
-                                                <option key={salesperson.href} value={salesperson.id}>{salesperson.first_name}</option>
-                                            )
-                                        })}
-                    </select>
-                </div>
+            <div className="mb-3 mt-3">
+                <select onChange={handleChange} name="salesperson" id="salesperson" className="form-select">
+                    <option value="">Choose a salesperson</option>
+                    {salespeople.map(agent => {
+                        return (
+                            <option key={agent.employee_id} value={agent.employee_id}>
+                                {agent.employee_id} - {agent.first_name} {agent.last_name}
+                            </option>
+                        );
+                    })}
+                </select>
             </div>
-
-            <table className="table-fill">
+            <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th className="text-left">Salesperson Name</th>
-                        <th className="text-left">Customer</th>
-                        <th className="text-left">Vin</th>
-                        <th className="text-left">Price</th>
+                        <th>Salesperson Employee ID</th>
+                        <th>Salesperson Name </th>
+                        <th>Customer</th>
+                        <th>VIN</th>
+                        <th>Price</th>
                     </tr>
                 </thead>
-                {/* <tbody className="table-hover">
-            {sale.map(saleItem => {
-                return (
-                <tr key={ saleItem.id }>
-                    <td className="text-left">{ customer.first_name }</td>
-                    <td className="text-left">{ customer.last_name }</td>
-                    <td className="text-left">{ customer.phone_number }</td>
-                    <td className="text-left">{ customer.address }</td>
-                </tr>
-                );
-            })}
-        </tbody> */}
+                <tbody>
+                    {sales.map((sale) =>
+                    (<tr key={sale.id}>
+                        <td className="align-middle">{sale.salesperson.employee_id}</td>
+                        <td className="align-middle">{sale.salesperson.first_name} {sale.salesperson.last_name}</td>
+                        <td className="align-middle">{sale.customer.first_name} {sale.customer.last_name}</td>
+                        <td className="align-middle">{sale.automobile.vin}</td>
+                        <td className="align-middle">${sale.price}</td>
+                    </tr>))}
+
+                </tbody>
             </table>
         </>
     );
-
 }
+
 export default SalesHistory

@@ -22,7 +22,7 @@ def get_automobile():
             import_href=automobile["href"],
             defaults = {
                 "vin": automobile["vin"]
-            }
+            },
         )
 
 def poll(repeat=True):

@@ -21,11 +21,11 @@ class CustomerListEncoder(ModelEncoder):
 
 class SaleListEncoder(ModelEncoder):
     model = Sale
-    properties = ["automobile", "salesperson", "customer", "price", "id", "customer", "vin"]
+    properties = ["automobile", "salesperson", "customer", "price", "id", "customer"]
     encoders = {
-        # "automobile": AutomobileVODetailEncoder(),
+        "automobile": AutomobileVODetailEncoder(),
         "salesperson": SalespersonListEncoder(),
-        # "customer": CustomerListEncoder(),
+        "customer": CustomerListEncoder(),
     }
 
 
@@ -123,34 +123,33 @@ def api_list_sales(request):
 
     else:
         content = json.loads(request.body)
+        salesperson = content["salesperson"]
+        automobile = content["automobile"]
+        customer = content["customer"]
+
         try:
-            employee_id = content["salesperson"]
-            salesperson = Salesperson.objects.get(employee_id=employee_id)
-            content["salesperson"] = salesperson
+            content["salesperson"]= Salesperson.objects.get(employee_id=content.get("salesperson"))
         except Salesperson.DoesNotExist:
             return JsonResponse(
                 {"message": "Agent does not exist"},
                 status = 400
             )
-        # try:
-        automobile = AutomobileVO.objects.get(vin=content["vin"])
-        content["vin"] = automobile
-        # except AutomobileVO.DoesNotExist:
-        #     return JsonResponse(
-        #         {"message": "Automobile does not exist"},
-        #         status = 400
-        #     )
         try:
-            first_name = content["customer"]
-            customer = Customer.objects.get(first_name=first_name)
-            content["customer"] = customer
+            content["automobile"] = AutomobileVO.objects.get(vin=content.get("automobile"))
+        except AutomobileVO.DoesNotExist:
+                return JsonResponse(
+                    {"message": "Automobile does not exist"},
+                    status = 400
+                )
+        try:
+            content["customer"] = Customer.objects.get(id=content.get("customer"))
         except Customer.DoesNotExist:
             return JsonResponse(
                 {"message": "Customer does not exist"},
                 status = 400
             )
         sale = Sale.objects.create(**content)
-        AutomobileVO.objects.filter(vin=automobile).update(sold=True)
+        AutomobileVO.objects.filter(vin=automobile).update(sold=False)
         return JsonResponse(
             sale,
             encoder=SaleListEncoder,

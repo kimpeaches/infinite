@@ -17,33 +17,33 @@ function SalesList() {
     }, [])
 
     return (
-        <>
+        <div className="container">
             <h2 className="text-center">Sales</h2>
-        <table className="table-fill">
-        <thead>
-        <tr>
-            <th className="text-left">Salesperson Employee ID</th>
-            <th className="text-left">Salesperson Name</th>
-            <th className="text-left">Customer</th>
-            <th className="text-left">Vin</th>
-            <th className="text-left">Price</th>
-        </tr>
-        </thead>
-        {/* <tbody className="table-hover">
-            {sale.map(saleItem => {
-                return (
-                <tr key={ saleItem.id }>
-                    <td className="text-left">{ customer.first_name }</td>
-                    <td className="text-left">{ customer.last_name }</td>
-                    <td className="text-left">{ customer.phone_number }</td>
-                    <td className="text-left">{ customer.address }</td>
-                </tr>
-                );
-            })}
-        </tbody> */}
-    </table>
-    </>
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Salesperson Name</th>
+                        <th>Customer</th>
+                        <th>Vin</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {sale.map(saleItem => (
+                        <tr key={saleItem.id}>
+                            <td>{saleItem.salesperson.employee_id}</td>
+                            <td>{`${saleItem.salesperson.first_name} ${saleItem.salesperson.last_name}`}</td>
+                            <td>{`${saleItem.customer.first_name} ${saleItem.customer.last_name}`}</td>
+                            <td>{saleItem.automobile.vin}</td>
+                            <td>{saleItem.price}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
+
 
 }
 
