@@ -1,4 +1,4 @@
-function ManufacturerForm(props){
+function ManufacturerForm({updateManufacturer}){
     const handleSubmit = async (e) => {
         e.preventDefault()
         const data = {}
@@ -16,6 +16,7 @@ function ManufacturerForm(props){
         const response = await fetch(manuUrl, fetchConfig)
         if (response.ok){
             e.target.reset()
+            updateManufacturer()
     }
 }
 
