@@ -1,18 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import AgentList from './Sales/AgentList';
 import AgentForm from './Sales/AgentForm';
-import CustomersList from './Sales/CustomersList';
-import CustomersForm from './Sales/CustomersForm';
 import SalesList from './Sales/SalesList';
 import SalesForm from './Sales/SalesForm';
 import SalesHistory from './Sales/SalesHistory';
 import ModelList from './Inventory/ModelList';
 import ModelForm from './Inventory/ModelForm';
-// import TechnicianList from './Services/TechnicianList';
-import React, { useEffect, useState } from 'react';
-// import TechnicianForm from './Services/TechnicianFrom';
+import TechnicianList from './Services/TechnicianList';
+import TechnicianForm from './Services/TechnicianFrom';
 import AppointmentList from './Services/Appointment';
 import AppointmentForm from './Services/AppointmentForm';
 import ManufacturerList from './Inventory/Manufacturer';
@@ -33,37 +31,37 @@ function App() {
   const [automobiles, setAutomobiles] = useState([])
   const [models, setModels] = useState([])
 
-  async function getModels(){
+  async function getModels() {
     const response = await fetch("http://localhost:8100/api/models/");
-    const {models} = await response.json()
+    const { models } = await response.json()
     setModels(models)
   }
   useEffect(() => {
     getModels()
   }, [])
 
-  async function getManufacturer(){
+  async function getManufacturer() {
     const response = await fetch("http://localhost:8100/api/manufacturers/")
-    const {manufacturers} = await response.json()
+    const { manufacturers } = await response.json()
     setManufacturer(manufacturers)
-    }
+  }
   useEffect(() => {
-      getManufacturer()
+    getManufacturer()
   }, [])
 
-  async function getAutomobiles(){
+  async function getAutomobiles() {
     const response = await fetch("http://localhost:8100/api/automobiles/")
-    const {autos} = await response.json()
+    const { autos } = await response.json()
     setAutomobiles(autos)
-    }
+  }
   useEffect(() => {
     getAutomobiles()
   }, [])
 
 
-  async function getTechnicians(){
+  async function getTechnicians() {
     const response = await fetch("http://localhost:8080/api/technicians/")
-    const {technician} = await response.json()
+    const { technician } = await response.json()
     setTechnician(technician)
   }
   useEffect(() => {
@@ -71,19 +69,14 @@ function App() {
   }, [])
 
 
-  async function getAppointments(){
+  async function getAppointments() {
     const response = await fetch("http://localhost:8080/api/appointments/")
-    const {appointments} = await response.json()
+    const { appointments } = await response.json()
     setAppointment(appointments)
   }
   useEffect(() => {
     getAppointments()
   }, [])
-
-
-
-
-
 
   return (
 
@@ -95,40 +88,40 @@ function App() {
       backgroundAttachment: "fixed",
       backgroundPosition: "center"
     }}>
-    <BrowserRouter>
-      <Nav />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="salespeople/" element={<AgentList />} />
-          <Route path="salespeople/create" element={<AgentForm />} />
-          <Route path="customers/" element={<CustomersList />} />
-          <Route path="customers/create" element={<CustomersForm />} />
-          <Route path="sales/" element={<SalesList />} />
-          <Route path="sales/create" element={<SalesForm />} />
-          <Route path="sales/history" element={<SalesHistory />} />
-          <Route path="models/" element={<ModelList />} />
-          <Route path="models/create" element={<ModelForm />} />
-          <Route path="automobiles">
-            <Route path="list" element={<AutomobileList automobiles={automobiles} />}/>
-            <Route path="create" element={<AutomobileForm models={models} updateAuto={getAutomobiles} />}/>
+      <BrowserRouter>
+        <Nav />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="salespeople/" element={<AgentList />} />
+            <Route path="salespeople/create" element={<AgentForm />} />
+            <Route path="customers/" element={<CustomersList />} />
+            <Route path="customers/create" element={<CustomersForm />} />
+            <Route path="sales/" element={<SalesList />} />
+            <Route path="sales/create" element={<SalesForm />} />
+            <Route path="sales/history" element={<SalesHistory />} />
+            <Route path="models/" element={<ModelList />} />
+            <Route path="models/create" element={<ModelForm />} />
+            <Route path="automobiles">
+              <Route path="list" element={<AutomobileList automobiles={automobiles} />} />
+              <Route path="create" element={<AutomobileForm models={models} updateAuto={getAutomobiles} />} />
             </Route>
-          <Route path="manufacturer">
-            <Route path="list" element={<ManufacturerList manufacturer={manufacturer} />}/>
-            <Route path="new" element={<ManufacturerForm />}/>
+            <Route path="manufacturer">
+              <Route path="list" element={<ManufacturerList manufacturer={manufacturer} />} />
+              <Route path="new" element={<ManufacturerForm />} />
             </Route>
-          <Route path="technicians">
-            <Route path="list" element={<TechnicianList technician={technician} />}/>
-            <Route path="new" element={<TechnicianForm />}/>
+            <Route path="technicians">
+              <Route path="list" element={<TechnicianList technician={technician} />} />
+              <Route path="new" element={<TechnicianForm />} />
             </Route>
-          <Route path="appointments">
-            <Route path="list" element={<AppointmentList appointment={appointment} updateAppointment={getAppointments} />}/>
-            <Route path="history" element={<ServiceHistory appointment={appointment} />}/>
-            <Route path="new" element={<AppointmentForm technician={technician} updateAppointment={getAppointments}  />}/>
-          </Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
+            <Route path="appointments">
+              <Route path="list" element={<AppointmentList appointment={appointment} updateAppointment={getAppointments} />} />
+              <Route path="history" element={<ServiceHistory appointment={appointment} />} />
+              <Route path="new" element={<AppointmentForm technician={technician} updateAppointment={getAppointments} />} />
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
