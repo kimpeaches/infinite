@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import MainPage from './MainPage';
 import Nav from './Nav';
 import AgentList from './Sales/AgentList';
@@ -9,7 +10,6 @@ import SalesHistory from './Sales/SalesHistory';
 import ModelList from './Inventory/ModelList';
 import ModelForm from './Inventory/ModelForm';
 import TechnicianList from './Services/TecnicianList';
-import React, { useEffect, useState } from 'react';
 import TechnicianForm from './Services/TechnicianFrom';
 import AppointmentList from './Services/Appointment';
 import AppointmentForm from './Services/AppointmentForm';
@@ -31,37 +31,37 @@ function App() {
   const [automobiles, setAutomobiles] = useState([])
   const [models, setModels] = useState([])
 
-  async function getModels(){
+  async function getModels() {
     const response = await fetch("http://localhost:8100/api/models/");
-    const {models} = await response.json()
+    const { models } = await response.json()
     setModels(models)
   }
   useEffect(() => {
     getModels()
   }, [])
 
-  async function getManufacturer(){
+  async function getManufacturer() {
     const response = await fetch("http://localhost:8100/api/manufacturers/")
-    const {manufacturers} = await response.json()
+    const { manufacturers } = await response.json()
     setManufacturer(manufacturers)
-    }
+  }
   useEffect(() => {
-      getManufacturer()
+    getManufacturer()
   }, [])
 
-  async function getAutomobiles(){
+  async function getAutomobiles() {
     const response = await fetch("http://localhost:8100/api/automobiles/")
-    const {autos} = await response.json()
+    const { autos } = await response.json()
     setAutomobiles(autos)
-    }
+  }
   useEffect(() => {
     getAutomobiles()
   }, [])
 
 
-  async function getTechnicians(){
+  async function getTechnicians() {
     const response = await fetch("http://localhost:8080/api/technicians/")
-    const {technician} = await response.json()
+    const { technician } = await response.json()
     setTechnician(technician)
   }
   useEffect(() => {
@@ -69,19 +69,14 @@ function App() {
   }, [])
 
 
-  async function getAppointments(){
+  async function getAppointments() {
     const response = await fetch("http://localhost:8080/api/appointments/")
-    const {appointments} = await response.json()
+    const { appointments } = await response.json()
     setAppointment(appointments)
   }
   useEffect(() => {
     getAppointments()
   }, [])
-
-
-
-
-
 
   return (
 
@@ -119,14 +114,14 @@ function App() {
             <Route path="list" element={<TechnicianList technician={technician} />}/>
             <Route path="create" element={<TechnicianForm updateTechnician={getTechnicians} />}/>
             </Route>
-          <Route path="appointments">
-            <Route path="list" element={<AppointmentList appointment={appointment} updateAppointment={getAppointments} />}/>
-            <Route path="history" element={<ServiceHistory appointment={appointment} />}/>
-            <Route path="new" element={<AppointmentForm technician={technician} updateAppointment={getAppointments}  />}/>
-          </Route>
-        </Routes>
-      </div>
-    </BrowserRouter>
+            <Route path="appointments">
+              <Route path="list" element={<AppointmentList appointment={appointment} updateAppointment={getAppointments} />} />
+              <Route path="history" element={<ServiceHistory appointment={appointment} />} />
+              <Route path="new" element={<AppointmentForm technician={technician} updateAppointment={getAppointments} />} />
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
