@@ -14,9 +14,15 @@ import ModelForm from './Inventory/ModelForm';
 import React, { useEffect, useState } from 'react';
 // import TechnicianForm from './Services/TechnicianFrom';
 import AppointmentList from './Services/Appointment';
-// import ManufacturerList from './Inventory/Manufacturer';
-// import ManufacturerForm from './Inventory/ManufacturerForm';
-import ServiceHistoryList from './Services/ServiceHistory';
+import AppointmentForm from './Services/AppointmentForm';
+import ManufacturerList from './Inventory/Manufacturer';
+import ManufacturerForm from './Inventory/ManufacturerForm';
+import CustomersList from './Sales/CustomersList';
+import CustomersForm from './Sales/CustomersForm';
+import AutomobileList from './Inventory/AutomobileList';
+import AutomobileForm from './Inventory/AutomobileForm';
+import ServiceHistory from './Services/ServiceHistory';
+
 
 function App() {
 
@@ -24,6 +30,17 @@ function App() {
   const [technician, setTechnician] = useState([])
   const [appointment, setAppointment] = useState([])
   const [manufacturer, setManufacturer] = useState([])
+  const [automobiles, setAutomobiles] = useState([])
+  const [models, setModels] = useState([])
+
+  async function getModels(){
+    const response = await fetch("http://localhost:8100/api/models/");
+    const {models} = await response.json()
+    setModels(models)
+  }
+  useEffect(() => {
+    getModels()
+  }, [])
 
   async function getManufacturer(){
     const response = await fetch("http://localhost:8100/api/manufacturers/")
@@ -32,6 +49,15 @@ function App() {
     }
   useEffect(() => {
       getManufacturer()
+  }, [])
+
+  async function getAutomobiles(){
+    const response = await fetch("http://localhost:8100/api/automobiles/")
+    const {autos} = await response.json()
+    setAutomobiles(autos)
+    }
+  useEffect(() => {
+    getAutomobiles()
   }, [])
 
 
@@ -47,12 +73,14 @@ function App() {
 
   async function getAppointments(){
     const response = await fetch("http://localhost:8080/api/appointments/")
-    const {appointment} = await response.json()
-    setAppointment(appointment)
+    const {appointments} = await response.json()
+    setAppointment(appointments)
   }
   useEffect(() => {
     getAppointments()
   }, [])
+
+
 
 
 
@@ -72,11 +100,6 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          {/* <Route path="manufacturers/" element={<ManufacturerList />} /> */}
-          {/* <Route path="manufacturers/create" element={<ManufacturerForm />} /> */}
-          {/* <Route path="technicians/" element={<TechnicianList />} /> */}
-          {/* <Route path="technicians/create" element={<TechnicianForm />} /> */}
-          <Route path="appointments/" element={<AppointmentList />} />
           <Route path="salespeople/" element={<AgentList />} />
           <Route path="salespeople/create" element={<AgentForm />} />
           <Route path="customers/" element={<CustomersList />} />
@@ -86,8 +109,23 @@ function App() {
           <Route path="sales/history" element={<SalesHistory />} />
           <Route path="models/" element={<ModelList />} />
           <Route path="models/create" element={<ModelForm />} />
-          <Route path="services/history" element={<ServiceHistoryList />} />
-
+          <Route path="automobiles">
+            <Route path="list" element={<AutomobileList automobiles={automobiles} />}/>
+            <Route path="create" element={<AutomobileForm models={models} updateAuto={getAutomobiles} />}/>
+            </Route>
+          <Route path="manufacturer">
+            <Route path="list" element={<ManufacturerList manufacturer={manufacturer} />}/>
+            <Route path="new" element={<ManufacturerForm />}/>
+            </Route>
+          <Route path="technicians">
+            <Route path="list" element={<TechnicianList technician={technician} />}/>
+            <Route path="new" element={<TechnicianForm />}/>
+            </Route>
+          <Route path="appointments">
+            <Route path="list" element={<AppointmentList appointment={appointment} updateAppointment={getAppointments} />}/>
+            <Route path="history" element={<ServiceHistory appointment={appointment} />}/>
+            <Route path="new" element={<AppointmentForm technician={technician} updateAppointment={getAppointments}  />}/>
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -18,9 +18,14 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
+    status_choices = (
+        ('created', 'Created'),
+        ('canceled', 'canceled'),
+        ('complete', 'Complete'),
+    )
     date_time = models.DateTimeField(null=True)
     reason = models.CharField(max_length=200)
-    status = models.CharField(max_length=100, default=False, null=True)
+    status = models.CharField(max_length=100, choices=status_choices, default='created', null='created')
     customer = models.CharField(max_length=100)
     vin = models.CharField(max_length=17, unique=True)
 

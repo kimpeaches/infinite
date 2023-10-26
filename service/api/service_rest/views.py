@@ -103,7 +103,7 @@ def api_list_appointments(request):
 
 
 
-@require_http_methods(["GET","DELETE"])
+@require_http_methods(["GET","DELETE", "PUT"])
 def show_appointments(request, pk):
     if request.method == "GET":
         apppoinment = Appointment.objects.get(id=pk)
@@ -112,6 +112,16 @@ def show_appointments(request, pk):
             encoder=AppointmentEncoder,
             safe=False,
         )
+    elif request.method == "PUT":
+        content = json.loads(request.body)
+        Appointment.objects.filter(id=pk).update(**content)
+        appointment = Appointment.objects.get(id=pk)
+        return JsonResponse(
+            appointment,
+            encoder=AppointmentEncoder,
+            safe=False,
+        )
+
     elif request.method == "DELETE":
         count, _ = Appointment.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
