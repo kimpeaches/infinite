@@ -26,7 +26,10 @@ function SalesForm() {
         const response = await fetch(salesUrl, fetchConfig);
         if (response.ok) {
             const newSale = await response.json();
-            e.target.reset()
+            setPrice("");
+            setAutomobiles([]);
+            setSalesperson([]);
+            setCustomers([]);
 
             const vin = data.automobile
             const soldAuto = `http://localhost:8100/api/automobiles/${vin}/`;

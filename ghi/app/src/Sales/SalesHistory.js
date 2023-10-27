@@ -50,10 +50,10 @@ function SalesHistory() {
                     })}
                 </select>
             </div>
-            <table className="table translucent-table">
+            <table className="table">
                 <thead>
                     <tr>
-                        <th>Salesperson Employee ID</th>
+                        <th>Employee ID</th>
                         <th>Salesperson Name </th>
                         <th>Customer</th>
                         <th>VIN</th>
@@ -63,8 +63,8 @@ function SalesHistory() {
                 <tbody>
                     {sales.map(sale =>
                         (<tr>
-                            <td className="align-middle">{sale.salesperson.employee_id}</td>
-                            <td className="align-middle">{sale.salesperson.first_name} {sale.salesperson.last_name}</td>
+                            <td>{sale.salesperson.employee_id}</td>
+                            <td>{sale.salesperson.first_name} {sale.salesperson.last_name}</td>
                             <td>{sale.customer.first_name} {sale.customer.last_name}</td>
                             <td>{sale.automobile.vin}</td>
                             <td>{sale.price}</td>

@@ -5,7 +5,7 @@ function AutomobileForm({models , updateAuto}){
         e.preventDefault()
         const data = {}
         new FormData(e.target).forEach((value,key) => (data[key]= value))
-        console.log(data)
+
 
         const manuUrl = "http://localhost:8100/api/automobiles/"
         const fetchConfig = {
