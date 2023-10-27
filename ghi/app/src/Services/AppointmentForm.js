@@ -19,8 +19,10 @@ function AppointmentForm({technician,updateAppointment}){
         if (response.ok){
             e.target.reset()
             updateAppointment()
-    }
-}
+        } else if (response.status === 500) {
+          alert("Already have appointment with this VIN");
+        }
+      }
 
 
 

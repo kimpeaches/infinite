@@ -20,8 +20,10 @@ function AutomobileForm({models , updateAuto}){
         if (response.ok){
             e.target.reset()
             updateAuto()
-    }
-}
+        } else if (response.status === 400) {
+          alert("VIN already exists");
+        }
+      }
 
 
 

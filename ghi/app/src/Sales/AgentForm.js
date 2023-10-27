@@ -18,8 +18,10 @@ function AgentForm(props) {
 
     const response = await fetch(agentUrl, fetchConfig);
     if (response.ok) {
-      const newAgent = await response.json();;
       e.target.reset();
+      window.location.reload()
+    } else if (response.status === 500) {
+      alert("Employee ID already exists");
     }
   }
 
