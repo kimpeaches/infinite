@@ -27,7 +27,6 @@ function AppointmentList({ appointment, updateAppointment }) {
     };
     const canceleResponse = await fetch(cancelUrl, fetchConfig);
     if (canceleResponse.ok) {
-      console.log(canceleResponse);
       updateAppointment();
     }
   };

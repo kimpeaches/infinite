@@ -4,7 +4,7 @@ function AppointmentForm({technician,updateAppointment}){
         e.preventDefault()
         const data = {}
         new FormData(e.target).forEach((value,key) => (data[key]= value))
-        console.log(data)
+
 
         const appUrl = "http://localhost:8080/api/appointments/"
         const fetchConfig = {

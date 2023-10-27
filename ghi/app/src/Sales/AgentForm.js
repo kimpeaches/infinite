@@ -18,8 +18,7 @@ function AgentForm(props) {
 
     const response = await fetch(agentUrl, fetchConfig);
     if (response.ok) {
-      const newAgent = await response.json();
-      console.log(newAgent);
+      const newAgent = await response.json();;
       e.target.reset();
     }
   }
