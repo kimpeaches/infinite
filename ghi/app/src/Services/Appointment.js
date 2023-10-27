@@ -27,12 +27,12 @@ function AppointmentList({ appointment, updateAppointment }) {
     };
     const canceleResponse = await fetch(cancelUrl, fetchConfig);
     if (canceleResponse.ok) {
-      console.log(canceleResponse)
+      console.log(canceleResponse);
       updateAppointment();
     }
   };
 
-  const containerStyle = {
+  const appointmentContainerStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -43,12 +43,12 @@ function AppointmentList({ appointment, updateAppointment }) {
     color: 'gray',
     marginBottom: '20px',
     border: '1px solid gray',
-    padding: '10px',
+    padding: '20px', // Enlarged padding
     textAlign: 'center',
   };
 
   return (
-    <div className="container" style={containerStyle}>
+    <div className="container" style={appointmentContainerStyle}>
       <h2 className="text-center">Service Appointments</h2>
       {appointment
         .filter((appointment) => appointment.status === "created")
@@ -56,11 +56,15 @@ function AppointmentList({ appointment, updateAppointment }) {
           let newtime = new Date(appointment.date_time);
           let date = newtime.toLocaleDateString("en-US");
           let time = newtime.toLocaleTimeString("en-US");
+          const vip = appointment.vip ? "Yes" : "No";
 
           return (
             <div key={appointment.id} style={appointmentStyle}>
               <p>
                 <strong>Vin:</strong> {appointment.vin}
+              </p>
+              <p>
+                <strong>VIP:</strong> {vip}
               </p>
               <p>
                 <strong>Customer:</strong> {appointment.customer}

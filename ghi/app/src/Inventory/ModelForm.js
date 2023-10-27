@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '/app/src/index.css';
 
-function ModelForm({getModels}) {
+function ModelForm({updateModels}) {
 
   const [manufacturers, setManufacturers] = useState([])
   const fetchData = async () => {
@@ -32,7 +32,7 @@ function ModelForm({getModels}) {
     const response = await fetch(modelUrl, fetchConfig);
     if (response.ok) {
       e.target.reset();
-      getModels()
+      updateModels()
     }
 }
 
