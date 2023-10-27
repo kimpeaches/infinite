@@ -15,7 +15,7 @@ function ModelList({ models }) {
     <div className="container">
       <h2 className="text-center"style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black" }}>Models</h2>
       <div className="row">
-        {models.map((model) => (
+        {models.map(model => (
           <div
             key={model.id}
             className="col-md-4 mb-4"
