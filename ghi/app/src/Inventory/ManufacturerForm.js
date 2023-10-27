@@ -13,12 +13,14 @@ function ManufacturerForm({updateManufacturer}){
             },
         }
 
-        const response = await fetch(manuUrl, fetchConfig)
-        if (response.ok){
-            e.target.reset()
-            updateManufacturer()
-    }
-}
+        const response = await fetch(manuUrl, fetchConfig);
+        if (response.ok) {
+          e.target.reset();
+          updateManufacturer();
+        } else if (response.status === 400) {
+          alert("Manufacturer already exists");
+        }
+      };
 
     return(
     <div className="container">

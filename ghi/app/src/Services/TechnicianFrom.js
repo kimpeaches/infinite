@@ -18,8 +18,10 @@ function TechnicianForm({updateTechnician}){
         if (response.ok){
             e.target.reset()
             updateTechnician()
-    }
-}
+        } else if (response.status === 500) {
+          alert("Employee ID already exists");
+        }
+      }
 
 
 
