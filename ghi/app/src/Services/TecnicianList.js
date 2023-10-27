@@ -18,7 +18,7 @@ function TechnicianList({ technician }) {
 
   return (
     <div className="container" style={containerStyle}>
-      <h2 className="text-center">Technicians</h2>
+      <h2 className="text-center"style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black" }}>Technicians</h2>
       {technician.map((tech) => {
         return (
           <div key={tech.employee_id} style={rowStyle}>
