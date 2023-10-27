@@ -20,7 +20,6 @@ function ModelForm({getModels}) {
     e.preventDefault();
     const data = {};
     new FormData(e.target).forEach((value, key) => (data[key] = value));
-    console.log(data)
     const modelUrl = 'http://localhost:8100/api/models/';
     const fetchConfig = {
         method: "POST",
