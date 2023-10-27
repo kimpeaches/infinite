@@ -1,3 +1,5 @@
+import '/app/src/index.css';
+
 function AutomobileForm({models , updateAuto}){
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -27,9 +29,9 @@ function AutomobileForm({models , updateAuto}){
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-            <div className="card mt-4">
+            <div className="card mt-4 translucent-table">
                 <div className='card-body'>
-          <h1 className='card-title'>Create a new Automobile</h1>
+          <h1 className='card-title'style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black" }}>Create a new Automobile</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <input type="text" className="form-control" name="color" placeholder="Color" />

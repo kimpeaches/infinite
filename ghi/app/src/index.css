@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.translucent-table {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0.7; /* Adjust the opacity value as needed */
+  margin: 0 auto;
+  width: 100%;
+}
+
+.center-table-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh; /* Adjust this value as needed for your design */
+}

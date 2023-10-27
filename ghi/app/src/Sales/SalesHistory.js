@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '/app/src/index.css';
 
 function SalesHistory() {
     const [sale, setSale] = useState([])
@@ -31,12 +32,15 @@ function SalesHistory() {
         const employee_id = e.target.value
         setSelectedPerson(employee_id)
     }
-    const sales = selectedPerson ? salesDisplay.filter(sale => sale.salesperson.employee_id === selectedPerson) : salesDisplay
+    const sales = selectedPerson ? sale.filter(sale => sale.salesperson.employee_id.toString() === selectedPerson) : sale
+
     return (
         <>
+            <h2 style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black" }}>Sales History</h2>
+            <div className="card mt-4 translucent-table">
             <div className="mb-3 mt-3">
                 <select onChange={handleChange} name="salesperson" id="salesperson" className="form-select">
-                    <option value="">Choose a salesperson</option>
+                    <option value="" style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black" }}>Choose a salesperson</option>
                     {salespeople.map(agent => {
                         return (
                             <option key={agent.employee_id} value={agent.employee_id}>
@@ -46,7 +50,7 @@ function SalesHistory() {
                     })}
                 </select>
             </div>
-            <table className="table table-striped">
+            <table className="table translucent-table">
                 <thead>
                     <tr>
                         <th>Salesperson Employee ID</th>
@@ -57,17 +61,19 @@ function SalesHistory() {
                     </tr>
                 </thead>
                 <tbody>
-                    {sales.map((sale) =>
-                    (<tr key={sale.id}>
-                        <td className="align-middle">{sale.salesperson.employee_id}</td>
-                        <td className="align-middle">{sale.salesperson.first_name} {sale.salesperson.last_name}</td>
-                        <td className="align-middle">{sale.customer.first_name} {sale.customer.last_name}</td>
-                        <td className="align-middle">{sale.automobile.vin}</td>
-                        <td className="align-middle">${sale.price}</td>
-                    </tr>))}
+                    {sales.map(sale =>
+                        (<tr>
+                            <td className="align-middle">{sale.salesperson.employee_id}</td>
+                            <td className="align-middle">{sale.salesperson.first_name} {sale.salesperson.last_name}</td>
+                            <td>{sale.customer.first_name} {sale.customer.last_name}</td>
+                            <td>{sale.automobile.vin}</td>
+                            <td>{sale.price}</td>
+                        </tr>)
+                    )}
 
                 </tbody>
             </table>
+            </div>
         </>
     );
 }

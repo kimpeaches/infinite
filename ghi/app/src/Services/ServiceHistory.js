@@ -1,44 +1,58 @@
-function ServiceHistory({appointment}) {
-    return (
-        <>
-            <h2 className="text-center">Service Appointments</h2>
-        <table className="table-fill">
-        <thead>
-        <tr>
-            <th className="text-left">Vin</th>
-            <th className="text-left">Customer</th>
-            <th className="text-left">Date</th>
-            <th className="text-left">Time</th>
-            <th className="text-left">Technician</th>
-            <th className="text-left">Reason</th>
-            <th className="text-left">status</th>
-        </tr>
-        </thead>
-        <tbody className="table-hover">
-            {appointment.map(appointment => {
-                    let newtime = new Date(appointment.date_time)
-                    let date = newtime.toLocaleDateString("en-US")
-                    console.log(newtime)
-                    let time = newtime.toLocaleTimeString("en-US")
-                    return (
-                        <tr key={appointment.id}>
-                            <td>{appointment.vin}</td>
-                            <td>{appointment.customer}</td>
-                            <td>{date}</td>
-                            <td>{time}</td>
-                            <td>{appointment.technician.first_name}{appointment.technician.last_name}</td>
-                            <td>{appointment.reason}</td>
-                            <td>{appointment.status}</td>
-                        </tr>
-                    );
-                })}
+import React from 'react';
 
-        </tbody>
-    </table>
-    </>
-    );
+function ServiceHistory({ appointment }) {
+  const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+  };
 
+  const appointmentStyle = {
+    fontSize: '24px',
+    color: 'gray',
+    marginBottom: '20px',
+    border: '1px solid gray',
+    padding: '10px',
+  };
 
+  return (
+    <div className="container text-center">
+      <h2>Service Appointments</h2>
+      <div style={containerStyle}>
+        {appointment.map((appointment) => {
+          let newtime = new Date(appointment.date_time);
+          let date = newtime.toLocaleDateString("en-US");
+          let time = newtime.toLocaleTimeString("en-US");
+
+          return (
+            <div key={appointment.id} style={appointmentStyle}>
+              <p>
+                <strong>Vin:</strong> {appointment.vin}
+              </p>
+              <p>
+                <strong>Customer:</strong> {appointment.customer}
+              </p>
+              <p>
+                <strong>Date:</strong> {date}
+              </p>
+              <p>
+                <strong>Time:</strong> {time}
+              </p>
+              <p>
+                <strong>Technician:</strong>{' '}
+                {appointment.technician.first_name} {appointment.technician.last_name}
+              </p>
+              <p>
+                <strong>Reason:</strong> {appointment.reason}
+              </p>
+              <p>
+                <strong>Status:</strong> {appointment.status}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 export default ServiceHistory;

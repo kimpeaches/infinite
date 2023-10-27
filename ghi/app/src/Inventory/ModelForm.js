@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import '/app/src/index.css';
 
 function ModelForm({getModels}) {
 
@@ -39,9 +40,9 @@ function ModelForm({getModels}) {
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-          <div className="card mt-4">
+          <div className="card mt-4 translucent-table">
             <div className="card-body">
-              <h3 className="card-title">Create a vehicle model</h3>
+              <h3 className="card-title" style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black" }}>Create a vehicle model</h3>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <input type="text" className="form-control" name="name" placeholder="Model name" />

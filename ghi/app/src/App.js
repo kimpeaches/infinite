@@ -20,6 +20,7 @@ import AutomobileForm from './Inventory/AutomobileForm';
 import ServiceHistory from './Services/ServiceHistory';
 import CustomersList from './Sales/CustomersList';
 import CustomersForm from './Sales/CustomersForm';
+import tronGif from './tron.gif';
 
 
 function App() {
@@ -81,12 +82,11 @@ function App() {
   return (
 
     <div style={{
-      backgroundImage: `url("https://images.unsplash.com/photo-1541599468348-e96984315921?auto=format&fit=crop&q=80&w=1520&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")`,
-      backgroundRepeat: "no-repeat",
+      backgroundImage: `url(${tronGif})`, // Set the GIF as the background
       backgroundSize: "cover",
       minHeight: "100vh",
-      backgroundAttachment: "fixed",
-      backgroundPosition: "center"
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed"
     }}>
     <BrowserRouter>
       <Nav />

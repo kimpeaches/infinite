@@ -1,29 +1,41 @@
-function TechnicianList({technician}) {
-    return (
-        <>
-            <h2 className="text-center">Technicians</h2>
-        <table className="table-fill">
-        <thead>
-        <tr>
-            <th className="text-left">Employee ID</th>
-            <th className="text-left">First Name</th>
-            <th className="text-left">Last Name</th>
-        </tr>
-        </thead>
-        <tbody className="table-hover">
-            {technician.map(tech => {
-                return (
-                <tr key={ tech.employee_id }>
-                    <td className="text-left">{ tech.employee_id }</td>
-                    <td className="text-left">{ tech.first_name }</td>
-                    <td className="text-left">{ tech.last_name }</td>
-                </tr>
-                );
-            })}
-        </tbody>
-    </table>
-    </>
-    );
+import React from 'react';
+
+function TechnicianList({ technician }) {
+  const containerStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  };
+
+  const rowStyle = {
+    fontSize: '24px',
+    color: 'gray',
+    marginBottom: '20px',
+    border: '1px solid gray',
+    padding: '10px',
+    textAlign: 'center',
+  };
+
+  return (
+    <div className="container" style={containerStyle}>
+      <h2 className="text-center">Technicians</h2>
+      {technician.map((tech) => {
+        return (
+          <div key={tech.employee_id} style={rowStyle}>
+            <p>
+              <strong>Employee ID:</strong> {tech.employee_id}
+            </p>
+            <p>
+              <strong>First Name:</strong> {tech.first_name}
+            </p>
+            <p>
+              <strong>Last Name:</strong> {tech.last_name}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 export default TechnicianList;

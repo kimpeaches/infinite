@@ -1,3 +1,4 @@
+import '/app/src/index.css';
 function AppointmentForm({technician,updateAppointment}){
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -27,9 +28,9 @@ function AppointmentForm({technician,updateAppointment}){
     <div className="container">
       <div className="row">
         <div className="col-md-6 offset-md-3">
-            <div className="card mt-4">
+            <div className="card mt-4 translucent-table">
                 <div className='card-body'>
-          <h1 className='card-title'>Create a new Appointment</h1>
+          <h1 className='card-title' style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black" }}>Create a new Appointment</h1>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <input type="text" className="form-control" name="vin" placeholder="Automobile VIN" />

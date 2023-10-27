@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '/app/src/index.css';
 
 function SalesList() {
 
@@ -18,8 +19,9 @@ function SalesList() {
 
     return (
         <div className="container">
-            <h2 className="text-center">Sales</h2>
-            <table className="table table-striped">
+            <div>
+            <h2 className="text-center" style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black"}}>Sales</h2>
+            <table className="table translucent-table">
                 <thead>
                     <tr>
                         <th>Employee ID</th>
@@ -41,6 +43,7 @@ function SalesList() {
                     ))}
                 </tbody>
             </table>
+            </div>
         </div>
     );
 
