@@ -40,7 +40,7 @@ function SalesHistory() {
             <div className="card mt-4 translucent-table">
             <div className="mb-3 mt-3">
                 <select onChange={handleChange} name="salesperson" id="salesperson" className="form-select">
-                    <option value="" style={{ fontSize: '3rem', fontWeight: 'bold', color: "white", textShadow: "4px 4px 4px black" }}>Choose a salesperson</option>
+                    <option value="">Choose a salesperson</option>
                     {salespeople.map(agent => {
                         return (
                             <option key={agent.employee_id} value={agent.employee_id}>
